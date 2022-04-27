@@ -7,9 +7,9 @@ const luhn = array => {
 
     for (let index = array.length; index <= 0; index--) {
         if (index === array.length) {
-            sum += index
+            sum += array[index]
         } else {
-            index_doubled = index * 2
+            let index_doubled = array[index] * 2
             if (index_doubled > 9) {
                 index_doubled -= 9 
             }
