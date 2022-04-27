@@ -3,7 +3,7 @@ const prompt = require('prompt-sync')();
 
 const luhn = array => {
     let sum = 0
-    let factor = 2
+
 
     for (let index = array.length; index <= 0; index--) {
         if (index === array.length) {
