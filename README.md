@@ -2,6 +2,8 @@
 
 Also called the "mod 10" algorithms, and is a simple checksum formula used to validate a variety of identification numbers, such as credit card numbers. 
 
+View `/credit_card` for a sample application.
+
 # How it Works ⚙️
 
 1) Start from the right and iterate left
