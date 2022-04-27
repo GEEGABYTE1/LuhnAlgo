@@ -25,5 +25,22 @@ const luhn = array => {
         return 'invalid'
     }
 
-
 }
+
+// Sample Test
+
+const string_to_array = () => {
+    let input_string = prompt('String: ')
+    let array = []
+    
+    for (let string_idx = 0; string_idx <= input_string.length; string_idx++) {
+        array.push(input_string[string_idx])
+    }
+
+    return array
+}
+
+array_input = string_to_array()
+result = luhn(array_input)
+console.log(result)
+
