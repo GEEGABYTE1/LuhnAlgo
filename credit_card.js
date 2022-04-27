@@ -48,3 +48,17 @@ const validateCred = array => {
         return false
     }
 }
+
+const findInvalidcards = nested_array => {
+    let invalid_cards = []
+    
+    for (let array_idx = 0; array_idx <= nested_array.length; array_idx++){
+        rel_array = nested_array[array_idx]
+        validate_rel_array = validateCred(rel_array)
+        if (validate_rel_array === false) {
+            invalid_cards.push(rel_array)
+        }
+    }
+
+    return invalid_cards
+}
