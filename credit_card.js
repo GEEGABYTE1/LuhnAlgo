@@ -53,7 +53,7 @@ const findInvalidcards = nested_array => {
     let invalid_cards = []
     
     for (let array_idx = 0; array_idx <= nested_array.length; array_idx++){
-        rel_array = nested_array[array_idx]
+        let rel_array = nested_array[array_idx]
         validate_rel_array = validateCred(rel_array)
         if (validate_rel_array === false) {
             invalid_cards.push(rel_array)
@@ -61,4 +61,44 @@ const findInvalidcards = nested_array => {
     }
 
     return invalid_cards
+}
+
+const idInvalidCardCompanies = invalid_array => {
+    let emailed_companies = []
+
+    for (let array_idx = 0; array_idx <= invalid_array.length; array_idx++){
+        let current_invalid_array = invalid_array[array_idx]
+        let first_digit = current_invalid_array[0]
+
+        switch (first_digit) {
+            case 3:
+                if ('Amex (American Express)' in emailed_companies === false) {
+                    emailed_companies.push('Amex (American Express)')
+                }
+                
+                break
+            case 4:
+                if ('Visa' in emailed_companies === false) {
+                    emailed_companies.push('Visa')
+                }
+                
+                break
+            case 5:
+                if ('Mastercard' in emailed_companies === false) {
+                    emailed_companies.push('Mastercard')
+                }
+                break
+            case 6:
+                if ('Discover' in emailed_companies === false) {
+                    emailed_companies.push('Discover')
+                }
+                
+                break
+            default:
+                if ('Company not found' in emailed_companies === false) {
+                    emailed_companies.push('Company not found')
+                }
+                break
+        }
+    }
 }
