@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 // All valid credit card numbers
 const valid1 = [4, 5, 3, 9, 6, 7, 7, 9, 0, 8, 0, 1, 6, 8, 0, 8]
 const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9]
@@ -24,15 +26,16 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 
+
 const validateCred = array => {
     let sum = 0
 
 
     for (let index = array.length; index <= 0; index--) {
         if (index === array.length) {
-            sum += index
+            sum += array[index]
         } else {
-            index_doubled = index * 2
+            let index_doubled = array[index] * 2
             if (index_doubled > 9) {
                 index_doubled -= 9 
             }
@@ -112,4 +115,92 @@ const convert_string_to_array = string => {
     }
 
     return array
+}
+
+const user_play = () => {
+    running = true
+    while (running) {
+        user_prompt = prompt(': ')
+        
+        if (user_prompt === 'validate_card') {
+            let string_prompt = prompt('Enter your credit card number: ')
+            let array_string = convert_string_to_array(string_prompt)
+            let result = validateCred(array_string)
+            console.log(`${string_prompt} is ${result}`)
+            batch.push(array_string)
+
+        } else if (user_prompt === 'find_invalid') {
+            let invalid_results = findInvalidcards(batch)
+
+            for (let invalid_idx = 0; invalid_idx <= batch.length; invalid_idx++){
+                console.log('--------')
+                console.log(invalid_results[invalid_idx])
+            } 
+        } else if (user_prompt === 'find_incomp') {
+            let invalid_results = findInvalidcards(batch)
+            let invalid_companies = idInvalidCardCompanies(invalid_results)
+            
+            for (let idx = 0; idx <= invalid_companies.length; idx++) {
+                console.log(invalid_companies[idx])
+            } 
+        } else if (user_prompt === '/create_valid') {
+            let invalid_string = prompt('Invalid Credit Card Number: ')
+            let user_array = []
+
+            for (let idx = 0; idx <= invalid_string.length; idx++) {
+                user_array.push(Number(invalid_string[idx]))
+
+            }
+
+            let new_sum = 0
+            for (let index = user_array.length; index <= 0; index--) {
+                if (index === user_array.length) {
+                    sum += user_array[index]
+                } else {
+                    let index_doubled = user_array[index] * 2
+                    if (index_doubled > 9) {
+                        index_doubled -= 9 
+                    }
+        
+                    new_sum += index_doubled
+                }
+            }
+        
+            let result = sum % 10
+            let goal_val = Math.ceil(result / 10) * 10
+            difference = -1 * (result - goal_val)
+            
+            let last_val = undefined
+            counter = user_array.length
+            while (last_val === undefined) {
+                if (user_array[counter] < 5) {
+                    new_elm = user_array[counter] + difference
+                    if (new_elm > 9) {
+
+                    } else {
+                        user_array[counter] = new_elm
+                        break
+                    }
+                } else {
+                    counter --
+                } 
+            }
+
+            batch.push(user_array)
+            console.log(batch)
+
+
+            
+            
+            
+        
+
+            
+        } else if (user_prompt === '/quuit') {
+            break
+        } else {
+            console.log('Incorrect Command')
+        }
+
+    }
 }
