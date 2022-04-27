@@ -102,3 +102,14 @@ const idInvalidCardCompanies = invalid_array => {
         }
     }
 }
+
+const convert_string_to_array = string => {
+    array = []
+    
+    for (let string_idx = 0; string_idx <= string.length; string_idx++) {
+        array += Number(string[string_idx])
+
+    }
+
+    return array
+}
